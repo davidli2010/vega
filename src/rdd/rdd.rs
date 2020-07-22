@@ -218,6 +218,7 @@ pub trait Rdd: RddBase + 'static {
         F: SerFunc(Box<dyn Iterator<Item = Self::Item>>) -> Box<dyn Iterator<Item = U>>,
         Self: Sized,
     {
+        #[allow(unused_braces)]
         let ignore_idx = Fn!(move |_index: usize,
                                    items: Box<dyn Iterator<Item = Self::Item>>|
               -> Box<dyn Iterator<Item = _>> { (func)(items) });
@@ -438,8 +439,7 @@ pub trait Rdd: RddBase + 'static {
         Self: Sized,
     {
         let context = self.get_context();
-        let counting_func =
-            Fn!(|iter: Box<dyn Iterator<Item = Self::Item>>| { iter.count() as u64 });
+        let counting_func = Fn!(|iter: Box<dyn Iterator<Item = Self::Item>>| iter.count() as u64);
         Ok(context
             .run_job(self.get_rdd(), counting_func)?
             .into_iter()
@@ -837,7 +837,7 @@ pub trait Rdd: RddBase + 'static {
         self.intersection_with_num_partitions(other, self.number_of_splits())
     }
 
-    /// subtract function, same as the one found in apache spark 
+    /// subtract function, same as the one found in apache spark
     /// example of subtract can be found in subtract.rs
     /// performs a full outer join followed by and intersection with self to get subtraction.
     fn subtract<T>(&self, other: Arc<T>) -> SerArc<dyn Rdd<Item = Self::Item>>
@@ -848,7 +848,7 @@ pub trait Rdd: RddBase + 'static {
     {
         self.subtract_with_num_partition(other, self.number_of_splits())
     }
-    
+
     fn subtract_with_num_partition<T>(
         &self,
         other: Arc<T>,
@@ -1042,6 +1042,7 @@ pub trait Rdd: RddBase + 'static {
         };
         assert!(0.0 <= confidence && confidence <= 1.0);
 
+        #[allow(unused_braces)]
         let count_elements = Fn!(|(_ctx, iter): (
             TaskContext,
             Box<dyn Iterator<Item = Self::Item>>

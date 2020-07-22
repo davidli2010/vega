@@ -689,11 +689,8 @@ fn test_subtract() {
     let mut actual = ans.collect().unwrap();
     actual.sort();
 
-    
+    println!("{:?}", expected_vec);
+    println!("{:?}", actual);
 
-    println!("{:?}",expected_vec);
-    println!("{:?}",actual);
-        
-    assert_eq!(actual,expected_vec)
-
+    assert_eq!(actual, expected_vec)
 }
