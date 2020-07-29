@@ -28,7 +28,6 @@ pub mod io;
 mod map_output_tracker;
 mod partial;
 pub mod partitioner;
-#[path = "rdd/rdd.rs"]
 pub mod rdd;
 mod scheduler;
 mod serializable_traits;

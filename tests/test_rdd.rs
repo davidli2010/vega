@@ -6,7 +6,7 @@ use std::sync::Arc;
 use once_cell::sync::Lazy;
 use vega::io::*;
 use vega::partitioner::HashPartitioner;
-use vega::rdd::CoGroupedRdd;
+use vega::r#mod::CoGroupedRdd;
 use vega::*;
 
 static CONTEXT: Lazy<Arc<Context>> = Lazy::new(|| Context::new().unwrap());
