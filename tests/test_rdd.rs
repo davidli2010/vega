@@ -1,4 +1,3 @@
-use std::collections::HashSet;
 use std::fs::{create_dir_all, File};
 use std::io::prelude::*;
 use std::sync::Arc;
@@ -6,7 +5,7 @@ use std::sync::Arc;
 use once_cell::sync::Lazy;
 use vega::io::*;
 use vega::partitioner::HashPartitioner;
-use vega::r#mod::CoGroupedRdd;
+use vega::rdd::CoGroupedRdd;
 use vega::*;
 
 static CONTEXT: Lazy<Arc<Context>> = Lazy::new(|| Context::new().unwrap());
@@ -42,6 +41,7 @@ fn test_make_rdd() -> Result<()> {
     Ok(())
 }
 
+#[allow(unused_parens)]
 #[test]
 fn test_basic_operations() -> Result<()> {
     let sc = CONTEXT.clone();
