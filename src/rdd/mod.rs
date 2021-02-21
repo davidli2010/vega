@@ -631,11 +631,13 @@ pub trait Rdd: RddBase + 'static {
         let sum: f64 = weights.iter().sum();
         assert!(
             weights.iter().all(|&x| x >= 0.0),
-            format!("Weights must be nonnegative, but got {:?}", weights)
+            "Weights must be nonnegative, but got {:?}",
+            weights
         );
         assert!(
             sum > 0.0,
-            format!("Sum of weights must be positive, but got {:?}", weights)
+            "Sum of weights must be positive, but got {:?}",
+            weights
         );
 
         let seed_val: u64 = seed.unwrap_or(rand::random::<u64>());
