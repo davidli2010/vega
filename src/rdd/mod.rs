@@ -280,14 +280,14 @@ pub trait Rdd: RddBase + 'static {
         // cloned cause we will use `f` later.
         let cf = f.clone();
         let reduce_partition = Fn!(move |iter: Box<dyn Iterator<Item = Self::Item>>| {
-            let acc = iter.reduce(&cf);
+            let acc = Iterator::reduce(iter, &cf);
             match acc {
                 None => vec![],
                 Some(e) => vec![e],
             }
         });
         let results = self.get_context().run_job(self.get_rdd(), reduce_partition);
-        Ok(results?.into_iter().flatten().reduce(f))
+        Ok(Iterator::reduce(results?.into_iter().flatten(), f))
     }
 
     /// Aggregate the elements of each partition, and then the results for all the partitions, using a
