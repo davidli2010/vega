@@ -216,7 +216,7 @@ impl Default for Configuration {
         // loggin config:
         let log_level = match config.log_level {
             Some(val) => val,
-            _ => LogLevel::Info,
+            _ => LogLevel::Debug,
         };
         let log_cleanup = match config.log_cleanup {
             Some(cond) => cond,
